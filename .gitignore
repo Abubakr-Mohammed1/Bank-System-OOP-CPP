@@ -1,0 +1,76 @@
+# =========================
+# Visual Studio
+# =========================
+.vs/
+**/.vs/
+
+# Solution & user settings
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# =========================
+# Build folders
+# =========================
+Debug/
+Release/
+x64/
+x86/
+build/
+out/
+
+# =========================
+# IMPORTANT (المهم عندك)
+# =========================
+*.vcxproj
+*.vcxproj.filters
+
+# =========================
+# Compiled files
+# =========================
+*.exe
+*.out
+*.obj
+*.o
+*.pdb
+*.ilk
+*.lib
+*.dll
+
+# =========================
+# Visual Studio cache
+# =========================
+*.ipch
+*.vsidx
+*.VC.db
+*.VC.opendb
+
+# =========================
+# Logs & temp
+# =========================
+*.log
+*.tlog
+*.tmp
+*.cache
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Weird files
+# =========================
+0
+
+# personal / private files
+*solution*.txt
+*Doctor*.txt
