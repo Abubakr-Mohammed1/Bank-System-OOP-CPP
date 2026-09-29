@@ -18,7 +18,10 @@ protected:
 		{
 			cout << "\n" << clsUtil::Tabs(5) << SubTitle;
 		}
-		cout << "\n\n" << clsUtil::Tabs(5) << "-----------------------------------\n\n";
+		cout << "\n\n" << clsUtil::Tabs(5) << "-----------------------------------\n";
+
+		cout << "\n" << clsUtil::Tabs(5) << "User: " << CurrentUser.UserName << "\n";
+		cout << clsUtil::Tabs(5) << "Date: " << clsDate::DateToString(clsDate()) << "\n\n";
 	}
 
 	static bool CheckAccessRights(clsUser::ePermissions Permissions)
