@@ -31,6 +31,19 @@ private:
 
 	}
 
+	string _ConvertUserObjectToLogFile(string Seperator = "///")
+	{
+		string LoginRecord = "";
+
+		LoginRecord += clsDate::GetSystemDateAndTime() + Seperator;
+		LoginRecord += UserName + Seperator;
+		LoginRecord += Password + Seperator;
+		LoginRecord += to_string(Permissions) + Seperator;
+		LoginRecord += FirstName;
+
+		return LoginRecord;
+	}
+
 	static string _ConvertUserObjectToLine(clsUser User, string Seperator = "///")
 	{
 		string stUserRecord = "";
@@ -351,7 +364,20 @@ public:
 			return false;
 	}
 
+	void RegisterLogin()
+	{
+		string Line = _ConvertUserObjectToLogFile();
 
+		fstream MyFile;
+		MyFile.open("log.txt", ios::out | ios::app);
+
+		if (MyFile.is_open())
+		{
+
+			MyFile << Line << endl;
+			MyFile.close();
+		}
+	}
 
 
 

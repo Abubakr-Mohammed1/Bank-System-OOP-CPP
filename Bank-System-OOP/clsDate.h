@@ -26,11 +26,11 @@ public:
 		_Year = now->tm_year + 1900;
 	}
 
-	clsDate(string sDate) 
+	clsDate(string sDate)
 	{
 		vector <string> vDate;
 		vDate = clsString::Split(sDate, "/");
-		
+
 		_Day = stoi(vDate[0]);
 		_Month = stoi(vDate[1]);
 		_Year = stoi(vDate[2]);
@@ -84,12 +84,12 @@ public:
 		return _Year;
 	}
 	__declspec(property(get = GetYear, put = SetYear)) short Year;
-	
+
 	void Print()
 	{
 		cout << DateToString() << endl;
 	}
-	
+
 	static string DateToString(clsDate Date)
 	{
 		return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
@@ -567,6 +567,25 @@ public:
 		Date.Year = now->tm_year + 1900;
 
 		return Date;
+	}
+
+	static string GetSystemTime()
+	{
+
+		time_t t = time(0);
+		tm* td = localtime(&t);
+
+		string Time = "";
+		Time += to_string(td->tm_hour);
+		Time += ":" + to_string(td->tm_hour);
+		Time += ":" + to_string(td->tm_hour);
+
+		return Time;
+	}
+
+	static string GetSystemDateAndTime()
+	{
+		return DateToString(GetSystemDate()) + " - " + GetSystemTime();
 	}
 
 	static clsDate IncreaseDateByXDays(clsDate Date, short Days)
