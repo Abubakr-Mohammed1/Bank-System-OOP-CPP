@@ -11,6 +11,10 @@ using namespace std;
 class clsUser :public clsPerson
 {
 
+public:
+
+	struct sLoginRegisterRecord;
+
 private:
 
 	enum eMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
@@ -31,7 +35,22 @@ private:
 
 	}
 
-	string _ConvertUserObjectToLogFile(string Seperator = "///")
+	static sLoginRegisterRecord _ConvertLoginRegisterToRecord(string Line, string Seperator = "///")
+	{
+		vector <string> vLoginRegisterData;
+		vLoginRegisterData = clsString::Split(Line, Seperator);
+		sLoginRegisterRecord LoginRegisterRecord;
+
+		LoginRegisterRecord.DateTime = vLoginRegisterData[0];
+		LoginRegisterRecord.UserName = vLoginRegisterData[1];
+		LoginRegisterRecord.Password = vLoginRegisterData[2];
+		LoginRegisterRecord.Permissions = stoi(vLoginRegisterData[3]);
+
+		return LoginRegisterRecord;
+
+	}
+
+	string _ConvertUserObjectToLoginRegisterFile(string Seperator = "///")
 	{
 		string LoginRecord = "";
 
@@ -161,6 +180,14 @@ public:
 	enum ePermissions {
 		pFullAccess = -1, pShowClientsList = 1, pAddNewClient = 2, pDeleteClient = 4
 		, pUpdateClient = 8, pFindClient = 16, pTransactions = 32, pManageUsers = 64
+	};
+
+	struct sLoginRegisterRecord
+	{
+		string DateTime;
+		string UserName;
+		string Password;
+		int Permissions;
 	};
 
 	clsUser(eMode Mode, string UserName, string Password, int Permissions,
@@ -353,6 +380,31 @@ public:
 		return _LoadUsersDataFormFile();
 	}
 
+	static vector <sLoginRegisterRecord> GetLoginRegisterList()
+	{
+		vector <sLoginRegisterRecord> vLoginRegisterRecord;
+
+		fstream MyFile;
+		MyFile.open("log.txt", ios::in);
+
+		if (MyFile.is_open())
+		{
+			string Line;
+			sLoginRegisterRecord LoginRegisterRecord;
+
+			while (getline(MyFile, Line))
+			{
+				LoginRegisterRecord = _ConvertLoginRegisterToRecord(Line);
+
+				vLoginRegisterRecord.push_back(LoginRegisterRecord);
+			}
+
+			MyFile.close();
+		}
+
+		return vLoginRegisterRecord;
+	}
+
 	bool CheackAccessPermissions(ePermissions Permissions)
 	{
 		if (this->Permissions == ePermissions::pFullAccess)
@@ -366,7 +418,7 @@ public:
 
 	void RegisterLogin()
 	{
-		string Line = _ConvertUserObjectToLogFile();
+		string Line = _ConvertUserObjectToLoginRegisterFile();
 
 		fstream MyFile;
 		MyFile.open("log.txt", ios::out | ios::app);

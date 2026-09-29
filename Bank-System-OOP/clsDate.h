@@ -577,8 +577,8 @@ public:
 
 		string Time = "";
 		Time += to_string(td->tm_hour);
-		Time += ":" + to_string(td->tm_hour);
-		Time += ":" + to_string(td->tm_hour);
+		Time += ":" + to_string(td->tm_min);
+		Time += ":" + to_string(td->tm_sec);
 
 		return Time;
 	}
