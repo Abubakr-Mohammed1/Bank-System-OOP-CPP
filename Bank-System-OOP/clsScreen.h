@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "clsUtil.h"
+#include "global.h"
 
 using namespace std;
 
@@ -18,6 +19,21 @@ protected:
 			cout << "\n" << clsUtil::Tabs(5) << SubTitle;
 		}
 		cout << "\n\n" << clsUtil::Tabs(5) << "-----------------------------------\n\n";
+	}
+
+	static bool CheckAccessRights(clsUser::ePermissions Permissions)
+	{
+		if (!CurrentUser.CheackAccessPermissions(Permissions))
+		{
+			cout << clsUtil::Tabs(5) << "-----------------------------------";
+			cout << "\n\n" << clsUtil::Tabs(5) << "Access Denied! Contact Your Admin.";
+			cout << "\n\n" << clsUtil::Tabs(5) << "-----------------------------------\n";
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 

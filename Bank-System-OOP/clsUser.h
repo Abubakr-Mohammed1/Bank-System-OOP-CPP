@@ -295,7 +295,7 @@ public:
 
 	}
 
-	static clsUser Find(string UserName,string Password)
+	static clsUser Find(string UserName, string Password)
 	{
 
 		fstream MyFile;
@@ -338,6 +338,17 @@ public:
 	static vector <clsUser> GetUsersList()
 	{
 		return _LoadUsersDataFormFile();
+	}
+
+	bool CheackAccessPermissions(ePermissions Permissions)
+	{
+		if (this->Permissions == ePermissions::pFullAccess)
+			return true;
+
+		if ((Permissions & this->Permissions) == Permissions)
+			return true;
+		else
+			return false;
 	}
 
 
