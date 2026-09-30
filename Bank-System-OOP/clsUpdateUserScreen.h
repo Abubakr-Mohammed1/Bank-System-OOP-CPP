@@ -97,6 +97,13 @@ private:
 			Permissions += clsUser::ePermissions::pManageUsers;
 		}
 
+		cout << "\nShow Login Register List? y/n? ";
+		cin >> Access;
+		if (toupper(Access) == 'Y')
+		{
+			Permissions += clsUser::ePermissions::pLoginRegisterList;
+		}
+
 		return Permissions;
 	}
 

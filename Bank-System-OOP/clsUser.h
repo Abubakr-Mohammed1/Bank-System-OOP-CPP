@@ -179,7 +179,7 @@ public:
 
 	enum ePermissions {
 		pFullAccess = -1, pShowClientsList = 1, pAddNewClient = 2, pDeleteClient = 4
-		, pUpdateClient = 8, pFindClient = 16, pTransactions = 32, pManageUsers = 64
+		, pUpdateClient = 8, pFindClient = 16, pTransactions = 32, pManageUsers = 64, pLoginRegisterList = 128
 	};
 
 	struct sLoginRegisterRecord
