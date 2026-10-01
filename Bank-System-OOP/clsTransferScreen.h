@@ -21,7 +21,7 @@ private:
 		while (!clsBankClient::IsClientExist(AccountNumber))
 		{
 			cout << "\nClient With Account Number [" << AccountNumber << "] does not exist, choose another one: ";
-			AccountNumber = _ReadAccountNumer();
+			AccountNumber = clsInputValidate::ReadString();
 		}
 
 		return AccountNumber;
@@ -78,7 +78,7 @@ public:
 
 		if (Answer == 'Y' || Answer == 'y')
 		{
-			if (SourceClient.Transfer(Amount, DestinationClient))
+			if (SourceClient.Transfer(Amount, DestinationClient, CurrentUser.UserName))
 			{
 				cout << "\nTransfer done successfully.\n";
 			}

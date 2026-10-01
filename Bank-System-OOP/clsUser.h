@@ -50,7 +50,7 @@ private:
 
 	}
 
-	string _ConvertUserObjectToLoginRegisterFile(string Seperator = "///")
+	string _prepareLoginRecord(string Seperator = "///")
 	{
 		string LoginRecord = "";
 
@@ -385,7 +385,7 @@ public:
 		vector <sLoginRegisterRecord> vLoginRegisterRecord;
 
 		fstream MyFile;
-		MyFile.open("log.txt", ios::in);
+		MyFile.open("Login.txt", ios::in);
 
 		if (MyFile.is_open())
 		{
@@ -418,10 +418,10 @@ public:
 
 	void RegisterLogin()
 	{
-		string Line = _ConvertUserObjectToLoginRegisterFile();
+		string Line = _prepareLoginRecord();
 
 		fstream MyFile;
-		MyFile.open("log.txt", ios::out | ios::app);
+		MyFile.open("Login.txt", ios::out | ios::app);
 
 		if (MyFile.is_open())
 		{
