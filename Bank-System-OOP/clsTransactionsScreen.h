@@ -8,6 +8,7 @@
 #include "clsWithdrawScreen.h"
 #include "clsTotalBalancesScreen.h"
 #include "clsTransferScreen.h"
+#include "clsTransferLogScreen.h"
 
 using namespace std;
 
@@ -17,13 +18,13 @@ class clsTransactionsScreen :protected clsScreen
 private:
 
 	enum enTransactionsMenueOptions {
-		eDeposit = 1, eWithdraw = 2, eTotalBalances = 3, eTransfer = 4, eMainMenue = 5
+		eDeposit = 1, eWithdraw = 2, eTotalBalances = 3, eTransfer = 4, eTransferLog = 5, eMainMenue = 6
 	};
 
 	static short _ReadTransactionsMenueOption()
 	{
-		cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 5]? ";
-		short Choice = clsInputValidate::ReadshortNumberBetween(1, 5, "Enter Number between 1 to 5 ? ");
+		cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 6]? ";
+		short Choice = clsInputValidate::ReadshortNumberBetween(1, 6, "Enter Number between 1 to 6 ? ");
 		return Choice;
 	}
 
@@ -59,6 +60,12 @@ private:
 		clsTransferScreen::ShowTransferScreen();
 	}
 
+	static void _ShowTransferLogScreen()
+	{
+		//cout << "\nTransfer Log Screen Will be here...\n";
+		clsTransferLogScreen::ShowTransferRegisterScreen();
+	}
+
 	static void _ActivateTransactionsMenue(enTransactionsMenueOptions TransactionsMenueOption)
 	{
 		switch (TransactionsMenueOption)
@@ -88,6 +95,12 @@ private:
 		{
 			system("cls");
 			_ShowTransferScreen();
+			_GoBackToTransactionsMenue();
+		}
+		case enTransactionsMenueOptions::eTransferLog:
+		{
+			system("cls");
+			_ShowTransferLogScreen();
 			_GoBackToTransactionsMenue();
 		}
 		case enTransactionsMenueOptions::eMainMenue:
@@ -120,7 +133,8 @@ public:
 		cout << setw(37) << "" << "\t[2] Withdraw.\n";
 		cout << setw(37) << "" << "\t[3] Total Balances.\n";
 		cout << setw(37) << "" << "\t[4] Transfer.\n";
-		cout << setw(37) << "" << "\t[5] Main Menue.\n";
+		cout << setw(37) << "" << "\t[5] Transfer Log.\n";
+		cout << setw(37) << "" << "\t[6] Main Menue.\n";
 		cout << setw(37) << "" << "==========================================\n\n";
 
 		_ActivateTransactionsMenue((enTransactionsMenueOptions)_ReadTransactionsMenueOption());

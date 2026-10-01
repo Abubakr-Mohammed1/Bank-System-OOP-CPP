@@ -168,18 +168,40 @@ private:
 		_AddDataLineToFile(_ConvertClientObjectToLine(*this));
 	}
 
+	struct sTransferRegisterRecord;
+	static sTransferRegisterRecord _ConvertTransferRegisterToRecord(string Line, string Seperator = "///")
+	{
+		vector <string> vtransferRegisterData;
+		vtransferRegisterData = clsString::Split(Line, Seperator);
+		sTransferRegisterRecord TransferRegisterRecord;
+
+		TransferRegisterRecord.DateTime = vtransferRegisterData[0];
+		TransferRegisterRecord.SourceAccount = vtransferRegisterData[1];
+		TransferRegisterRecord.DestinationAccount = vtransferRegisterData[2];
+		TransferRegisterRecord.Amount = stof(vtransferRegisterData[3]);
+		TransferRegisterRecord.SourceBalance = stof(vtransferRegisterData[4]);
+		TransferRegisterRecord.DestinationBalance = stof(vtransferRegisterData[5]);
+		TransferRegisterRecord.UserName = (vtransferRegisterData[6]);
+
+		return TransferRegisterRecord;
+
+	}
+
+
 
 
 
 public:
 
-	struct sTransferRecord
+	struct sTransferRegisterRecord
 	{
 		string DateTime;
-		string AccFrom;
-		string AccTo;
+		string SourceAccount;
+		string DestinationAccount;
 		float Amount;
-		string Balance;
+		float SourceBalance;
+		float DestinationBalance;
+		string UserName;
 	};
 
 	clsBankClient(eMode Mode, string AccountNumber, string PinCode,
@@ -428,7 +450,30 @@ public:
 		return true;
 	}
 
+	static vector <sTransferRegisterRecord> GetTransferRegisterList()
+	{
+		vector <sTransferRegisterRecord> vTransferRegisterRecord;
 
+		fstream MyFile;
+		MyFile.open("Transfer.txt", ios::in);
+
+		if (MyFile.is_open())
+		{
+			string Line;
+			sTransferRegisterRecord TransferRegisterRecord;
+
+			while (getline(MyFile, Line))
+			{
+				TransferRegisterRecord = _ConvertTransferRegisterToRecord(Line);
+
+				vTransferRegisterRecord.push_back(TransferRegisterRecord);
+			}
+
+			MyFile.close();
+		}
+
+		return vTransferRegisterRecord;
+	}
 
 
 
