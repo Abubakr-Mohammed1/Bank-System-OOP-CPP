@@ -30,7 +30,7 @@ private:
 		vector<string> vUserData;
 		vUserData = clsString::Split(Line, Seperator);
 
-		return clsUser(eMode::UpdateMode, vUserData[0], vUserData[1], stoi(vUserData[2]), vUserData[3],
+		return clsUser(eMode::UpdateMode, vUserData[0], clsUtil::DecryptText(vUserData[1]), stoi(vUserData[2]), vUserData[3],
 			vUserData[4], vUserData[5], vUserData[6]);
 
 	}
@@ -43,7 +43,7 @@ private:
 
 		LoginRegisterRecord.DateTime = vLoginRegisterData[0];
 		LoginRegisterRecord.UserName = vLoginRegisterData[1];
-		LoginRegisterRecord.Password = vLoginRegisterData[2];
+		LoginRegisterRecord.Password = clsUtil::DecryptText(vLoginRegisterData[2]);
 		LoginRegisterRecord.Permissions = stoi(vLoginRegisterData[3]);
 
 		return LoginRegisterRecord;
@@ -56,7 +56,7 @@ private:
 
 		LoginRecord += clsDate::GetSystemDateAndTime() + Seperator;
 		LoginRecord += UserName + Seperator;
-		LoginRecord += Password + Seperator;
+		LoginRecord += clsUtil::EncryptText(Password) + Seperator;
 		LoginRecord += to_string(Permissions) + Seperator;
 		LoginRecord += FirstName;
 
@@ -68,7 +68,7 @@ private:
 		string stUserRecord = "";
 
 		stUserRecord += User.UserName + Seperator;
-		stUserRecord += User.Password + Seperator;
+		stUserRecord += clsUtil::EncryptText(User.Password) + Seperator;
 		stUserRecord += to_string(User.Permissions) + Seperator;
 		stUserRecord += User.FirstName + Seperator;
 		stUserRecord += User.LastName + Seperator;
