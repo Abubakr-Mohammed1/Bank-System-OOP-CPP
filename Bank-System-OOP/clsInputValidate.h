@@ -3,6 +3,7 @@
 #include "clsDate.h"
 #include "clsString.h"
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -11,7 +12,8 @@ class clsInputValidate
 
 public:
 
-    static bool IsNumberBetween(short Num, short From, short To)
+    template <typename T> 
+    static bool IsNumberBetween(T Num, T From, T To)
     {
         if (Num >= From && Num <= To)
             return true;
@@ -19,29 +21,29 @@ public:
             return false;
     }
 
-    static bool IsNumberBetween(int Num, int From, int To)
-    {
-        if (Num >= From && Num <= To)
-            return true;
-        else
-            return false;
-    }
+    //static bool IsNumberBetween(int Num, int From, int To)
+    //{
+    //    if (Num >= From && Num <= To)
+    //        return true;
+    //    else
+    //        return false;
+    //}
 
-    static bool IsNumberBetween(float Num, float From, float To)
-    {
-        if (Num >= From && Num <= To)
-            return true;
-        else
-            return false;
-    }
+    //static bool IsNumberBetween(float Num, float From, float To)
+    //{
+    //    if (Num >= From && Num <= To)
+    //        return true;
+    //    else
+    //        return false;
+    //}
 
-    static bool IsNumberBetween(double Num, double From, double To)
-    {
-        if (Num >= From && Num <= To)
-            return true;
-        else
-            return false;
-    }
+    //static bool IsNumberBetween(double Num, double From, double To)
+    //{
+    //    if (Num >= From && Num <= To)
+    //        return true;
+    //    else
+    //        return false;
+    //}
 
     static bool IsDateBetween(clsDate Date, clsDate From, clsDate To)
     {
@@ -64,9 +66,10 @@ public:
         return false;
     }
 
-    static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter a valid one : \n")
+    template <typename T>
+    static T ReadNumber(string ErrorMessage = "Invalid Number, Enter a valid one : \n")
     {
-        int Number;
+        T Number;
        
         while (!(cin >> Number))
         {
@@ -80,7 +83,7 @@ public:
         return Number;
     }
 
-    static double ReadDblNumber(string ErrorMessage = "Invalid Number, Enter a valid one : \n")
+  /*  static double ReadDblNumber(string ErrorMessage = "Invalid Number, Enter a valid one : \n")
     {
         double Number;
        
@@ -110,22 +113,23 @@ public:
         }
 
         return Number;
-    }
+    }*/
 
-    static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Invalid Number, Enter a valid one : ")
+    template <typename T>
+    static T ReadNumberBetween(T From, T To, string ErrorMessage = "Invalid Number, Enter a valid one : ")
     {
-        int Number = ReadIntNumber();
+        T Number = ReadNumber<T>();
 
         while (!IsNumberBetween(Number, From, To))
         {
             cout << ErrorMessage;
-            Number = ReadIntNumber();
+            Number = ReadNumber<T>();
         }
 
         return Number;
     }
 
-    static int ReadshortNumberBetween(short From, short To, string ErrorMessage = "Invalid Number, Enter a valid one : ")
+    /*static int ReadshortNumberBetween(short From, short To, string ErrorMessage = "Invalid Number, Enter a valid one : ")
     {
         short Number = ReadIntNumber();
 
@@ -149,7 +153,7 @@ public:
         }
 
         return Number;
-    }
+    }*/
 
     static bool IsValideDate(clsDate Date)
     {
@@ -163,21 +167,22 @@ public:
         return S1;
     }
 
-    static int ReadPositiveintNumber(string ErrorMessage = "Invalid Number, Enter a valid one : \n")
+    template <typename T>
+    static T ReadPositiveNumber(string ErrorMessage = "Invalid Number, Enter a valid one : \n")
     {
-        int Number = 0;
+        T Number = 0;
         
-        Number = ReadIntNumber();
+        Number = ReadNumber<T>();
 		while (Number <= 0)
         {
             cout << ErrorMessage;
-            Number = ReadIntNumber();
+            Number = ReadNumber<T>();
         }
 
         return Number;
     }
 
-    static double ReadPositiveDblNumber(string ErrorMessage = "Invalid Number, Enter a valid one : \n")
+    /*static double ReadPositiveDblNumber(string ErrorMessage = "Invalid Number, Enter a valid one : \n")
     {
         double Number = 0;
         
@@ -189,7 +194,7 @@ public:
         }
 
         return Number;
-    }
+    }*/
 
 };
 

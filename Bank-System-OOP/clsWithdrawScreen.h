@@ -55,7 +55,7 @@ public:
 
 		float Amount = 0;
 		cout << "\nPlease enter withdraw amount? ";
-		Amount = clsInputValidate::ReadPositiveDblNumber("Invalid amount, Enter a valid one: ");
+		Amount = clsInputValidate::ReadPositiveNumber<float>("Invalid amount, Enter a valid one: ");
 
 		cout << "\nAre you sure you want to perform this transactions? y/n? ";
 		char Answer = 'n';
