@@ -112,7 +112,7 @@ public:
         return Number;
     }
 
-    static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Invalid Number, Enter a valid one : \n")
+    static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Invalid Number, Enter a valid one : ")
     {
         int Number = ReadIntNumber();
 
@@ -125,7 +125,7 @@ public:
         return Number;
     }
 
-    static int ReadshortNumberBetween(short From, short To, string ErrorMessage = "Invalid Number, Enter a valid one : \n")
+    static int ReadshortNumberBetween(short From, short To, string ErrorMessage = "Invalid Number, Enter a valid one : ")
     {
         short Number = ReadIntNumber();
 
@@ -138,7 +138,7 @@ public:
         return Number;
     }
 
-    static double ReadDblNumberBetween(double From, double To, string ErrorMessage = "Invalid Number, Enter a valid one : \n")
+    static double ReadDblNumberBetween(double From, double To, string ErrorMessage = "Invalid Number, Enter a valid one : ")
     {
         double Number = ReadDblNumber();
 

@@ -219,7 +219,7 @@ public:
 
 	}
 
-	static bool IsClientExist(string CurrencyCode)
+	static bool IsCurrencyExist(string CurrencyCode)
 	{
 		clsCurrency C1 = clsCurrency::FindByCode(CurrencyCode);
 
